@@ -50,9 +50,8 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
         
-        if (Vector3.Distance(this.transform.position, targetPosition) <= 1.5f && this.isWalking)
+        if (Vector3.Distance(this.transform.position, targetPosition) <= agent.stoppingDistance && this.isWalking)
         {
-            Debug.Log("STOPPED: " + Vector3.Distance(this.transform.position, targetPosition));
             agent.isStopped = true;
             this.isWalking = false;
             animator.SetBool("isWalking", this.isWalking);

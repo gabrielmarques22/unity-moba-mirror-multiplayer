@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  attackRange: 2.5
+  attackRange: 3
   particleHolder: {fileID: 1708239720}
   particle: {fileID: 974367506101332754, guid: 0477d2752c372b5429be84d3d4de79c1, type: 3}
 --- !u!1001 &1671607768278943570
@@ -217,17 +217,17 @@ PrefabInstance:
     - target: {fileID: 2565248220961721653, guid: c1e33d7da1d91de45a98f7c6e6610eac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1
+      value: 5.7521086
       objectReference: {fileID: 0}
     - target: {fileID: 2565248220961721653, guid: c1e33d7da1d91de45a98f7c6e6610eac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.04
+      value: -1.1485816e-17
       objectReference: {fileID: 0}
     - target: {fileID: 2565248220961721653, guid: c1e33d7da1d91de45a98f7c6e6610eac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.09
+      value: 25.863758
       objectReference: {fileID: 0}
     - target: {fileID: 2565248220961721653, guid: c1e33d7da1d91de45a98f7c6e6610eac,
         type: 3}
@@ -294,10 +294,15 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2565248220961721654, guid: c1e33d7da1d91de45a98f7c6e6610eac,
+        type: 3}
+      propertyPath: m_StoppingDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2565248220961722058, guid: c1e33d7da1d91de45a98f7c6e6610eac,
         type: 3}
       propertyPath: m_Name
-      value: '[Enemy] Orc'
+      value: '[Enemy] Orc Variant (1)'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e33d7da1d91de45a98f7c6e6610eac, type: 3}

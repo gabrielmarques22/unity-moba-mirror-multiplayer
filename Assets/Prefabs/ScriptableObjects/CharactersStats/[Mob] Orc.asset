@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth:
     baseValue: 100
   damage:
-    baseValue: 10
+    baseValue: 7
   armor:
     baseValue: 2
   movSpeed:

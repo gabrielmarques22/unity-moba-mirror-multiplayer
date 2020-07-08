@@ -32,20 +32,28 @@ public class EnemyAttackComponent : NetworkBehaviour
     void Update()
     {
         if (currentTarget == null)
-            return;
-
-        if(Vector3.Distance(this.transform.position, currentTarget.transform.position) <= attackRange)
-        {
-
-            isAttacking = true;
-            animator.SetBool("isAttacking", isAttacking);
-            transform.LookAt(currentTarget.transform);
-        }
-        else
         {
             isAttacking = false;
             animator.SetBool("isAttacking", isAttacking);
         }
+ 
+
+        if (currentTarget != null)
+        {
+            if(Vector3.Distance(this.transform.position, currentTarget.transform.position) <= attackRange)
+            {
+
+                isAttacking = true;
+                animator.SetBool("isAttacking", isAttacking);
+                transform.LookAt(currentTarget.transform);
+            }
+            else
+            {
+                isAttacking = false;
+                animator.SetBool("isAttacking", isAttacking);
+            }
+        }
+        
 
     }
     // Triggered by the animation on the client. Send Attack command
@@ -72,9 +80,15 @@ public class EnemyAttackComponent : NetworkBehaviour
         {
             currentTarget = null;
             // Check if there's still a player in range. If so, make him the new target
-            if(enemyDetection.players.Count > 0)
+            if (enemyDetection.players.Count > 0)
             {
+                Debug.Log("Player leaving the range. or dead");
                 currentTarget = enemyDetection.players[0]; // @todo Improve this to aim the closest one
+            } else
+            {
+                
+                isAttacking = false;
+                animator.SetBool("isAttacking", isAttacking);
             }
         }
     }
@@ -98,7 +112,11 @@ public class EnemyAttackComponent : NetworkBehaviour
         hp.TakeDamage(damage);
         if (hp.IsDead())
         {
+            currentTarget = null;
+            Debug.Log(currentTarget);
             // Enemy killed player do something
+            enemy.GetComponent<CharacterBase>().Die();
+            enemyDetection.RemoveDeadPlayer(enemy.gameObject);
         }
     }
 

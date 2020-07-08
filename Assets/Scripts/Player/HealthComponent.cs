@@ -61,7 +61,6 @@ public class HealthComponent : NetworkBehaviour
         {
             this.isDead = true;
             Debug.Log(netId + " has been killed");
-            transform.Translate(Random.Range(-15, 15), 1.5f, Random.Range(-15, 15));
         }
     }
 

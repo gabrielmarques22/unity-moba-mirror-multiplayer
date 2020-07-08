@@ -94,6 +94,7 @@ public class AttackComponent : NetworkBehaviour
         hp.TakeDamage(damage);
         if (hp.IsDead())
         {
+            NetworkServer.Destroy(enemy.gameObject);
             client.GetComponent<AttackComponent>().RpcEnemyKilled();
         }
     }
