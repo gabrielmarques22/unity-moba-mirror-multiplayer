@@ -14,6 +14,9 @@ public class PlayerMovement : NetworkBehaviour
     public LayerMask mask;
     private CameraController cameraController;
 
+    [SerializeField]
+    private float stoppingDistance = 1f;
+
     private ParticleSystem cachedClickParticle;
     [SerializeField]
     private GameObject clickParticleGO;
@@ -50,7 +53,7 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
         
-        if (Vector3.Distance(this.transform.position, targetPosition) <= agent.stoppingDistance && this.isWalking)
+        if (Vector3.Distance(this.transform.position, targetPosition) <= this.stoppingDistance && this.isWalking)
         {
             agent.isStopped = true;
             this.isWalking = false;
