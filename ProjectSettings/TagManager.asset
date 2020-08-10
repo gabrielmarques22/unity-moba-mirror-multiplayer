@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Ally
+  - HERO_HUD
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Character
   - Ground
   - RangeCheck
-  - 
-  - 
+  - IgnoreOutline
+  - Skills
   - 
   - 
   - 

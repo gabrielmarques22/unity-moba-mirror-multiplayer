@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Mirror;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ public class EnemyMob : CharacterBase
     {
         base.Die();
         // Play Die Animation
-        // Destroy over the network
+        // Give XP
+        // Drop loot
+        // Destroy over the network. Temporary
+        NetworkServer.Destroy(this.gameObject);
+
     }
 }

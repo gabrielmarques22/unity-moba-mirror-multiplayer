@@ -7,9 +7,11 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterBase))]
 public class AttackComponent : NetworkBehaviour
 {
-    private CharacterBase characterBase;
-    public int damage = 20;
+
     public float attackRange = 1.5f;
+
+    private CharacterBase characterBase;
+    private int damage = 20;
     private bool isAttacking = false;
     private bool isRanged = false;
 
@@ -17,6 +19,7 @@ public class AttackComponent : NetworkBehaviour
     public LayerMask mask;
 
     private Animator animator;
+    private PlayerMovement playerMovement;
 
     public GameObject particleHolder, particle;
 
@@ -27,6 +30,7 @@ public class AttackComponent : NetworkBehaviour
         characterBase = this.GetComponent<CharacterBase>();
         damage = characterBase.stats.damage.getValue();
         isRanged = characterBase.IsRanged();
+        playerMovement = this.GetComponent<PlayerMovement>();
         
     }
 
@@ -43,25 +47,35 @@ public class AttackComponent : NetworkBehaviour
                 {
                     currentTarget = hit.collider.gameObject.GetComponentInParent<NetworkIdentity>().gameObject;
                     Debug.Log("Selected: " + currentTarget.name);
+                } else
+                {
+                    StopAttacking(hit.point);
                 }
             }
         }
-        if (currentTarget != null &&
-            Vector3.Distance(this.transform.position, currentTarget.transform.position) <= attackRange)
+        if (currentTarget != null)
         {
-            isAttacking = true;
-            animator.SetBool("isAttacking", isAttacking);
-            transform.LookAt(currentTarget.transform);
-        } else
-        {
-            isAttacking = false;
-            animator.SetBool("isAttacking", isAttacking);
-        }
-        if (isLocalPlayer)
-            if (currentTarget != null)
-                if (currentTarget.tag == "Enemy")
-                    if (Input.GetKeyDown(KeyCode.X))
-                        CmdAttack(currentTarget, netIdentity);
+            if(Vector3.Distance(this.transform.position, currentTarget.transform.position) <= attackRange)
+            {
+                isAttacking = true;
+                playerMovement.Stop();
+                animator.SetBool("isAttacking", isAttacking);
+                transform.LookAt(currentTarget.transform);
+            }
+            else
+            {
+                playerMovement.Move(currentTarget.transform.position);
+            }
+        }        
+
+    }
+
+    private void StopAttacking(Vector3 walkTo)
+    {
+        currentTarget = null;
+        isAttacking = false;
+        playerMovement.Move(walkTo);
+        animator.SetBool("isAttacking", isAttacking);
     }
 
     // Triggered by the animation on the client. Send Attack command
@@ -71,7 +85,6 @@ public class AttackComponent : NetworkBehaviour
             if (currentTarget.tag == "Enemy")
             {
                 CmdAttack(currentTarget, netIdentity);
-
             }
 
     }
@@ -94,7 +107,8 @@ public class AttackComponent : NetworkBehaviour
         hp.TakeDamage(damage);
         if (hp.IsDead())
         {
-            NetworkServer.Destroy(enemy.gameObject);
+            enemy.GetComponent<CharacterBase>().Die();
+            
             client.GetComponent<AttackComponent>().RpcEnemyKilled();
         }
     }
@@ -109,5 +123,10 @@ public class AttackComponent : NetworkBehaviour
         animator.SetBool("isAttacking", this.isAttacking);
         animator.SetBool("isWalking", false);
 
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, attackRange);
     }
 }

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OutlineBlit_SobelFilter
+  m_Shader: {fileID: -6465566751694194690, guid: 79827083071163e40a76266f876ee63a,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_11385AC2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_4A9EC785: 0
+    - Vector1_8D9139AE: 0
+    - Vector1_F471C85E: 0
+    - Vector1_F8D7BDF7: 0
+    - _Delta: 0.00109
+    - _Poseterize: 0
+    - _PosterizationCount: 8
+    - _Raw: 0
+    m_Colors:
+    - Color_44AF3CAB: {r: 0, g: 0, b: 0, a: 0}
+    - Color_81C65125: {r: 0, g: 0, b: 0, a: 0}
+    - Color_F8C9AFC8: {r: 1, g: 1, b: 1, a: 0}

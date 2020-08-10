@@ -8,5 +8,5 @@ using UnityEngine;
 public class CharacterStatSO : ScriptableObject
 {
     [SerializeField]
-    public Stat maxHealth, damage, armor, movSpeed;
+    public Stat maxHealth, damage, armor, movSpeed, maxMana;
 }

@@ -22,16 +22,30 @@ public class HealthComponent : NetworkBehaviour
     [SerializeField]
     private Image UI_HP_BAR;
     [SerializeField]
+    private Image UI_MAIN_HP_BAR;
+    [SerializeField]
     private GameObject UI_CANVAS;
     [SerializeField]
     private float updateBarTime = 0.1f;
 
+    public override void OnStartLocalPlayer()
+    {
+        UI_MAIN_HP_BAR = GameObject.FindGameObjectWithTag("HERO_HUD").GetComponent<HeroHudManager>().healthBar.GetComponent<Image>();
+    }
     // Start is called before the first frame update
     void Start()
     {
+
         characterBase = this.GetComponent<CharacterBase>();
-        currentHealth = characterBase.stats.maxHealth.getValue();
-        UpdateUI();
+        maxHealth = characterBase.stats.maxHealth.getValue();
+        currentHealth = maxHealth;
+        if(hasAuthority)
+            this.UI_MAIN_HP_BAR.fillAmount = 1;
+        this.UI_HP_BAR.fillAmount = 1; // Make sure UI starts at 1
+        StartCoroutine("UpdateUI");
+
+
+
     }
 
     // Check if the Entity is dead
@@ -45,15 +59,21 @@ public class HealthComponent : NetworkBehaviour
     public void TakeDamage(int amout)
     {
         amout -= characterBase.stats.armor.getValue();
-        Mathf.Clamp(amout, 0, int.MaxValue);
         currentHealth -= amout;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+    }
+
+    public void Heal(int amout)
+    {
+        currentHealth += amout;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
     }
 
     // Called on the clients whenever the SYNCVAR health is changed by the server
     public void OnHealthChange(int oldValue, int newValue)
     {
         int damage = oldValue - newValue;
-        Debug.Log(netId + " has taken " + damage + " damage");
+       //Debug.Log(netId + " has taken " + damage + " damage");
         StartCoroutine("UpdateUI");
 
         // update UI
@@ -61,6 +81,9 @@ public class HealthComponent : NetworkBehaviour
         {
             this.isDead = true;
             Debug.Log(netId + " has been killed");
+            // notify clients that the character died. Maybe should be trigger as a RPC from the server?
+            this.GetComponent<CharacterBase>().Die();
+
         }
     }
 
@@ -75,6 +98,8 @@ public class HealthComponent : NetworkBehaviour
         {
             elapsed += Time.deltaTime;
             this.UI_HP_BAR.fillAmount = Mathf.Lerp(cachedValue, newValue, elapsed / updateBarTime);
+            if(isLocalPlayer)
+                this.UI_MAIN_HP_BAR.fillAmount = Mathf.Lerp(cachedValue, newValue, elapsed / updateBarTime);
             yield return null;
 
         }
@@ -90,6 +115,8 @@ public class HealthComponent : NetworkBehaviour
             this.UI_HP_BAR.color = Color.green;
         }
         this.UI_HP_BAR.fillAmount = newValue;
+        if (isLocalPlayer)
+            this.UI_MAIN_HP_BAR.fillAmount = newValue;
 
     }
 

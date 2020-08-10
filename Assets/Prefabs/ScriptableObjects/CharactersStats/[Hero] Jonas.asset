@@ -20,3 +20,5 @@ MonoBehaviour:
     baseValue: 3
   movSpeed:
     baseValue: 10
+  maxMana:
+    baseValue: 30

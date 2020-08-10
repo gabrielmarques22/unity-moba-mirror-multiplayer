@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662d8f67c8a4de044b30e1b300f42f69, type: 3}
+  m_Name: '[SKILL] Heal'
+  m_EditorClassIdentifier: 
+  skillName: Heal
+  description: Heal hero in 25 HP
+  manaCost: 10
+  coolDown: 5
+  castDuration: 0
+  skillDuration: 1.5
+  baseDamage: 50
+  isInstantCast: 1
+  icon: {fileID: 21300000, guid: 40bbf9658252d9c45b49895adfac4bdc, type: 3}

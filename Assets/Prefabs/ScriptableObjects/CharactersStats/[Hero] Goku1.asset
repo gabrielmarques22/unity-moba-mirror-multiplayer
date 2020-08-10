@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: '[Hero] Goku1'
   m_EditorClassIdentifier: 
   maxHealth:
-    baseValue: 150
+    baseValue: 125
   damage:
     baseValue: 25
   armor:
     baseValue: 5
   movSpeed:
     baseValue: 10
+  maxMana:
+    baseValue: 50

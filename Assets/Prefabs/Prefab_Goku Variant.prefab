@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3551329934467770369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5441484741226007}
+  m_Layer: 8
+  m_Name: GokuAttackPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5441484741226007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3551329934467770369}
+  m_LocalRotation: {x: -0.49999997, y: 0.5, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176182042626767061}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: -45, y: 90, z: -45}
 --- !u!1001 &3108969511613913658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,7 +120,7 @@ PrefabInstance:
     - target: {fileID: -4963988690251306947, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4275793162769062564, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4,
         type: 3}
@@ -135,7 +165,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4,
         type: 3}
@@ -390,6 +420,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -6057140222963153312, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4, type: 3}
+--- !u!4 &4176182042626767061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7867366072454323473, guid: 4d6d07961ba7b9d4bb4a4b604568fdb4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3108969511613913658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7395317546377165668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,6 +433,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -176262107681045161, guid: 4eca97a66d771644db488fae42e6525f,
+        type: 3}
+      propertyPath: particle
+      value: 
+      objectReference: {fileID: 974367506101332754, guid: 0477d2752c372b5429be84d3d4de79c1,
+        type: 3}
+    - target: {fileID: -176262107681045161, guid: 4eca97a66d771644db488fae42e6525f,
+        type: 3}
+      propertyPath: particleHolder
+      value: 
+      objectReference: {fileID: 3551329934467770369}
+    - target: {fileID: 562331183, guid: 4eca97a66d771644db488fae42e6525f, type: 3}
+      propertyPath: skill_Q
+      value: 
+      objectReference: {fileID: 11400000, guid: d1802331d2f861b47bdfc4d22c9ea39f,
+        type: 2}
+    - target: {fileID: 562331183, guid: 4eca97a66d771644db488fae42e6525f, type: 3}
+      propertyPath: skill_Q_GO
+      value: 
+      objectReference: {fileID: 1991500012513776134, guid: 751f241205a84a64095891010a90cedb,
+        type: 3}
     - target: {fileID: 1747622070, guid: 4eca97a66d771644db488fae42e6525f, type: 3}
       propertyPath: m_Radius
       value: 0.5
@@ -410,12 +467,28 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3594097631874449228, guid: 4eca97a66d771644db488fae42e6525f,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 4199029704182261989, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: stats
       value: 
       objectReference: {fileID: 11400000, guid: 84f8e2a4f201f0b4d97f9c4864e14f87,
         type: 2}
+    - target: {fileID: 4199029704182261989, guid: 4eca97a66d771644db488fae42e6525f,
+        type: 3}
+      propertyPath: name
+      value: Goku
+      objectReference: {fileID: 0}
+    - target: {fileID: 4199029704182261989, guid: 4eca97a66d771644db488fae42e6525f,
+        type: 3}
+      propertyPath: heroFrame
+      value: 
+      objectReference: {fileID: 21300000, guid: e8f1775d51f1e154e8f91beee0d066db,
+        type: 3}
     - target: {fileID: 4664769607281274192, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -434,22 +507,22 @@ PrefabInstance:
     - target: {fileID: 6038799612203875175, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: m_Name
-      value: Prefab_Goku
+      value: Prefab_Goku Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6281957826182809994, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.57
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 6281957826182809994, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.139
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 6281957826182809994, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.56
+      value: 12.72
       objectReference: {fileID: 0}
     - target: {fileID: 6281957826182809994, guid: 4eca97a66d771644db488fae42e6525f,
         type: 3}

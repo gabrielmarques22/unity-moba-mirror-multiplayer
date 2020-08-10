@@ -9,13 +9,12 @@ public class PlayerMovement : NetworkBehaviour
 {
     private Animator animator;
     private NavMeshAgent agent;
+
     private bool isWalking;
+    public bool canWalk = true;
     private Vector3 targetPosition;
     public LayerMask mask;
     private CameraController cameraController;
-
-    [SerializeField]
-    private float stoppingDistance = 1f;
 
     private ParticleSystem cachedClickParticle;
     [SerializeField]
@@ -27,6 +26,7 @@ public class PlayerMovement : NetworkBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         animator = this.GetComponent<Animator>();
         cameraController = Camera.main.GetComponent<CameraController>();
+
         // Instantiate Particle For Caching.
         GameObject clickparticleInstantiated = Instantiate(clickParticleGO, this.transform.position, Quaternion.identity);
         cachedClickParticle = clickparticleInstantiated.GetComponent<ParticleSystem>();
@@ -43,26 +43,29 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-
-
-
+        // float distance = Vector3.Distance(this.transform.position, targetPosition)
         if (Input.GetMouseButtonDown(1)) {
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, mask)) {
                 this.Move(hit.point);
             }
         }
-        
-        if (Vector3.Distance(this.transform.position, targetPosition) <= this.stoppingDistance && this.isWalking)
+
+        if (targetPosition != null)
         {
-            agent.isStopped = true;
-            this.isWalking = false;
-            animator.SetBool("isWalking", this.isWalking);
+            float distance = Vector3.Distance(this.transform.position, targetPosition);
+            if(distance < 1.5)
+            {
+                Stop();
+            }
         }
     }
 
     public void Move(Vector3 targetPosition)
     {
+        if (!canWalk)
+            return;
+
         cachedClickParticle.transform.position = targetPosition + Vector3.up;
         cachedClickParticle.Play();
 
@@ -71,6 +74,13 @@ public class PlayerMovement : NetworkBehaviour
         animator.SetBool("isWalking", isWalking);
         agent.SetDestination(targetPosition);
         agent.isStopped = false;
+    }
 
+    public void Stop()
+    {
+        this.isWalking = false;
+        animator.SetBool("isWalking", isWalking);
+
+        agent.isStopped = true;
     }
 }
